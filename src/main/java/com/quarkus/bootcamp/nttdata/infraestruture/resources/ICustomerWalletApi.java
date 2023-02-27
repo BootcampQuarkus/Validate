@@ -1,7 +1,9 @@
 package com.quarkus.bootcamp.nttdata.infraestruture.resources;
 
+import com.quarkus.bootcamp.nttdata.infraestruture.entity.Card;
 import com.quarkus.bootcamp.nttdata.infraestruture.entity.customerWallet.CustomerD;
 import io.smallrye.mutiny.Uni;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -26,13 +28,8 @@ public interface ICustomerWalletApi {
   /*default Uni<CustomerD> fallbackGetById(String id) {
     return Uni.createFrom().item(new CustomerD());
   }*/
-
   @PUT
-  @Path("/{id}")
-  // @Fallback(fallbackMethod = "fallbackUpdate")
-  Uni<CustomerD> update(@PathParam("id") String id, CustomerD customerD);
-
-  /*default Uni<CustomerD> fallbackUpdate(String id) {
-    return Uni.createFrom().item(new CustomerD());
-  }*/
+  @Path("/card/{id}")
+  @Transactional
+  Uni<CustomerD> updateCardId(@PathParam("id") String id, Card card);
 }

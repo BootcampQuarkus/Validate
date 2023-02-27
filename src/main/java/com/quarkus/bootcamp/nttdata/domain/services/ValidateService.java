@@ -1,5 +1,6 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.infraestruture.entity.Card;
 import com.quarkus.bootcamp.nttdata.infraestruture.entity.Request;
 import com.quarkus.bootcamp.nttdata.infraestruture.entity.customerWallet.CustomerD;
 import com.quarkus.bootcamp.nttdata.infraestruture.resources.ICardBankApi;
@@ -55,10 +56,7 @@ public class ValidateService {
       );
       return ProductId.flatMap(p ->
             customerWalletApi.getById(rt.getValue().getCustomerWalletId())
-                  .flatMap(q -> {
-                    q.setCardId(p);
-                    return customerWalletApi.update(rt.getValue().getCustomerWalletId(), q);
-                  })
+                  .flatMap(q -> customerWalletApi.updateCardId(rt.getValue().getCustomerWalletId(), new Card(p)))
       );
     });
   }
