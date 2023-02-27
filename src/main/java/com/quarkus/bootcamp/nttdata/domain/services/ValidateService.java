@@ -50,7 +50,7 @@ public class ValidateService {
                               .findFirst()
                               .get()
                               // retorna el id del producto
-                              .getProductId())
+                              .getId())
                   )
       );
       return ProductId.flatMap(p ->
